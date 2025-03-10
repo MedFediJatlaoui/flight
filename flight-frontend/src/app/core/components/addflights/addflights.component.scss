@@ -1,0 +1,49 @@
+.add-flight-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.confirmation-dialog {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.add-flight-btn {
+  position: fixed !important;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-weight: 500;
+}
+.mat-paginator {
+  position: fixed !important;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+::ng-deep .success-snackbar {
+  background-color: #307333 !important;
+  color: white !important;
+}
+::ng-deep.error-snackbar {
+  background-color: #951818 !important;
+  color: #ffffff !important;
+}
+

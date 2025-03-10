@@ -1,0 +1,26 @@
+[
+  {
+    "dateDepart": "2024-06-15",
+    "dateArrivee": "2024-06-15",
+    "villeDepart": "Madagascar",
+    "villeArrivee": "Tunis",
+    "prix": 129.99,
+    "tempsTrajet": 195
+  },
+  {
+    "dateDepart": "2024-06-16T14:15:00",
+    "dateArrivee": "2024-06-16T17:20:00",
+    "villeDepart": "Djerba",
+    "villeArrivee": "Bordeaux",
+    "prix": 185.50,
+    "tempsTrajet": 185
+  },
+  {
+    "dateDepart": "2024-06-17T10:00:00",
+    "dateArrivee": "2024-06-17T12:30:00",
+    "villeDepart": "Enfidha",
+    "villeArrivee": "Rotterdam",
+    "prix": 145.00,
+    "tempsTrajet": 150
+  }
+]

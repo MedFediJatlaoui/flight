@@ -1,23 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { Flight } from "../../../shared/models/flight";
+import { AddflightsComponent } from "../addflights/addflights.component";
+import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-flights',
   templateUrl: './flights.component.html',
   styleUrls: ['./flights.component.scss']
 })
-export class FlightsComponent implements OnInit {
+export class FlightsComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   public flights: Flight[] = [];
+  public pagedFlights: Flight[] = [];
   public initialSearchDone = false;
 
-  constructor(private flightService: FlightService) {}
+  constructor(private flightService: FlightService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.flightService.flights$.subscribe(
       (data: Flight[]) => {
         this.flights = data;
         console.log('Updated flights:', this.flights);
+        this.updatePagedFlights();
       },
       (error) => {
         console.error('Error fetching flights:', error);
@@ -27,6 +34,26 @@ export class FlightsComponent implements OnInit {
     if (!this.initialSearchDone) {
       this.searchFlights();
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => this.updatePagedFlights());
+  }
+
+  openAddFlightDialog(): void {
+    const dialogRef = this.dialog.open(AddflightsComponent, {
+      width: '600px',
+      maxHeight: '80vh',
+      panelClass: 'custom-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Flight added!', result);
+        this.flights.push(result);
+        this.updatePagedFlights();
+      }
+    });
   }
 
   searchFlights(): void {
@@ -44,5 +71,10 @@ export class FlightsComponent implements OnInit {
       }
     );
     this.initialSearchDone = true;
+  }
+
+  updatePagedFlights(): void {
+    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+    this.pagedFlights = this.flights.slice(startIndex, startIndex + this.paginator.pageSize);
   }
 }

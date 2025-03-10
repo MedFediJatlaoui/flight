@@ -1,17 +1,24 @@
-<!-- flights.component.html -->
 <mat-sidenav-container class="flights-container">
-  <!-- Sidebar: Search Filters (SearchFlights component) -->
   <mat-sidenav mode="side" opened class="sidenav">
-    <app-searchflights></app-searchflights> <!-- Embedding the search flights component here -->
+    <app-searchflights></app-searchflights>
   </mat-sidenav>
 
-  <!-- Main content: Flight cards -->
   <mat-sidenav-content>
+    <div class="header">
+      <div class="header-content">
+        <span class="flex-spacer"></span>
+
+        <button mat-raised-button color="primary"
+                class="add-flight-btn"
+                (click)="openAddFlightDialog()">
+          Ajouter Vols
+        </button>
+      </div>
+    </div>
     <div class="flight-cards-container">
-      <mat-card *ngFor="let flight of flights" class="flight-card">
+      <mat-card *ngFor="let flight of pagedFlights" class="flight-card">
         <mat-card-content>
           <div class="flight-info">
-            <!-- Flight Header with Departure and Arrival Info -->
             <div class="flight-header">
               <div class="departure-info">
                 <span class="airport">{{ flight.villeDepart }}</span>
@@ -31,7 +38,6 @@
               </div>
             </div>
 
-            <!-- Flight Price -->
             <div class="flight-details">
               <span class="price">💰 {{ flight.prix }}</span>
             </div>
@@ -39,5 +45,10 @@
         </mat-card-content>
       </mat-card>
     </div>
+    <mat-paginator [length]="flights.length"
+                   [pageSize]="3"
+                   [pageSizeOptions]="[3]"
+                   (page)="updatePagedFlights()">
+    </mat-paginator>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {BehaviorSubject, catchError, map, Observable, throwError} from 'rxjs';
 import {Flight} from "../../shared/models/flight";
 
 @Injectable({
@@ -33,5 +33,21 @@ export class FlightService {
 
   updateFlights(flights: Flight[]) {
     this.flightsSubject.next(flights);
+  }
+  addFlights(flights: Flight[]): Observable<Flight[]> {
+    return this.http.post<Flight[]>(this.apiUrl, flights, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Flight[]>) => {
+        if (response.status === 201) {
+          console.log(response.body || [])
+          return response.body || [];
+        } else {
+          throw new Error('Unexpected response from the server.');
+        }
+      }),
+      catchError((error) => {
+        console.error('Error adding flights:', error);
+        return throwError(() => new Error('Failed to add flights.'));
+      })
+    );
   }
 }

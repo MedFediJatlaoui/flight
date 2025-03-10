@@ -3,6 +3,33 @@
   display: flex;
   min-height: 100vh;
 }
+.header {
+  padding: 16px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.add-flight-btn {
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-weight: 500;
+}
+
+.mat-paginator {
+
+
+    background-color: #003366 !important;
+    color: #f0f0f0;
+
+}
 
 .sidenav {
   width: 430px;
@@ -53,7 +80,7 @@
 .flight-header {
   display: flex;
   justify-content: center;
-  width: 100%; /* Adjusted to fit the card width */
+  width: 100%;
   font-size: 18px;
   font-weight: bold;
   color: #333;
@@ -79,7 +106,7 @@
 
 .long-arrow {
   font-size: 32px;
-  color: #2196f3;
+  color: #003366;
   margin-bottom: 10px;
 }
 
@@ -88,7 +115,10 @@
   font-weight: bold;
   color: #333;
 }
-
+.mat-sidenav-content{
+  width: 100%;
+  height: 100%;
+}
 .flight-details {
   margin-top: 14px;
   font-size: 16px;
@@ -98,10 +128,9 @@
   width: 100%;
 }
 
-/* Time and airport styling */
 .time,
 .airport {
-  color: #1976d2;
+  color: #003366;
   font-weight: bold;
 }
 

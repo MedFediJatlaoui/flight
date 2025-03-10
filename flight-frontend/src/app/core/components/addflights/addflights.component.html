@@ -1,0 +1,64 @@
+<div class="add-flight-container">
+  <h2>Ajouter des vols</h2>
+
+  <form [formGroup]="flightForm" (ngSubmit)="submitForm()">
+    <div class="form">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Ville de départ</mat-label>
+          <input matInput formControlName="villeDepart" placeholder="Entrez la ville">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Ville d'arrivée</mat-label>
+          <input matInput formControlName="villeArrivee" placeholder="Entrez la ville">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Date de départ</mat-label>
+          <input matInput formControlName="dateDepart" type="date">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Date d'arrivée</mat-label>
+          <input matInput formControlName="dateArrivee" type="date">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Prix</mat-label>
+          <input matInput formControlName="prix" type="number" placeholder="Entrez le prix">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Durée du trajet (en minutes)</mat-label>
+          <input matInput formControlName="tempsTrajet" type="number" placeholder="Entrez la durée">
+        </mat-form-field>
+      </div>
+      <div class="button-group">
+        <button mat-button type="button" (click)="flightForm.reset()">Annuler</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="flightForm.invalid">
+          Ajouter
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="flights.length > 0" class="flight-list">
+    <h3>Vols ajoutés :</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let flight of flights">
+        {{ flight.villeDepart }} → {{ flight.villeArrivee }} | Départ : {{ flight.dateDepart }} | Arrivée : {{ flight.dateArrivee }} | Prix : {{ flight.prix }} | Durée : {{ flight.tempsTrajet }} minutes
+      </mat-list-item>
+    </mat-list>
+    <div>
+    <button class="add-flight-btn"  mat-raised-button color="accent" (click)="submitAllFlights()">
+      Soumettre tous les vols
+    </button>
+    </div>
+  </div>
+</div>
