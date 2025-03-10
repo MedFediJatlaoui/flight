@@ -1,0 +1,43 @@
+<!-- flights.component.html -->
+<mat-sidenav-container class="flights-container">
+  <!-- Sidebar: Search Filters (SearchFlights component) -->
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-searchflights></app-searchflights> <!-- Embedding the search flights component here -->
+  </mat-sidenav>
+
+  <!-- Main content: Flight cards -->
+  <mat-sidenav-content>
+    <div class="flight-cards-container">
+      <mat-card *ngFor="let flight of flights" class="flight-card">
+        <mat-card-content>
+          <div class="flight-info">
+            <!-- Flight Header with Departure and Arrival Info -->
+            <div class="flight-header">
+              <div class="departure-info">
+                <span class="airport">{{ flight.villeDepart }}</span>
+                <span class="time">{{ flight.dateDepart | date:'shortTime' }}</span>
+              </div>
+
+              <div class="flight-path">
+                <span class="long-arrow">&#8594;</span> <!-- Long Arrow -->
+                <span class="duration">
+                  {{ (flight.tempsTrajet / 60) | number:'1.0-0' }}h {{ flight.tempsTrajet % 60 }}m
+                </span>
+              </div>
+
+              <div class="arrival-info">
+                <span class="airport">{{ flight.villeArrivee }}</span>
+                <span class="time">{{ flight.dateArrivee | date:'shortTime' }}</span>
+              </div>
+            </div>
+
+            <!-- Flight Price -->
+            <div class="flight-details">
+              <span class="price">💰 {{ flight.prix }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

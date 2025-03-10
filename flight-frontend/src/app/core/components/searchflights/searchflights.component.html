@@ -1,0 +1,38 @@
+<div class="search-flights-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Ville de départ</mat-label>
+    <input matInput [(ngModel)]="searchCriteria.villeDepart" placeholder="Entrez la ville">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Ville d'arrivée</mat-label>
+    <input matInput [(ngModel)]="searchCriteria.villeArrivee" placeholder="Entrez la ville">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date de départ</mat-label>
+    <input matInput [(ngModel)]="searchCriteria.dateDepart" type="date">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date d'arrivée</mat-label>
+    <input matInput [(ngModel)]="searchCriteria.dateArrivee" type="date">
+  </mat-form-field>
+
+  <div class="filter-buttons">
+    <div>
+      <button mat-icon-button [class.selected]="searchCriteria.filterByPrice" (click)="togglePriceFilter()">
+        <mat-icon>filter_list</mat-icon>
+        Filtrer par prix
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button [class.selected]="searchCriteria.filterByTime" (click)="toggleTimeFilter()">
+        <mat-icon>filter_list</mat-icon>
+        Filtrer par temps trajet
+      </button>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="searchFlights()">Rechercher</button>
+</div>
